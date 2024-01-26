@@ -32,7 +32,7 @@ public class TicketSeller {
         return PerformanceInfo.of(performanceRepository.findByName(name));
     }
 
-    public boolean reserve(ReserveInfo reserveInfo) {
+    public Boolean reserve(ReserveInfo reserveInfo) {
         log.info("reserveInfo ID => {}", reserveInfo.getPerformanceId());
         Performance info = performanceRepository.findById(reserveInfo.getPerformanceId())
             .orElseThrow(EntityNotFoundException::new);
@@ -44,7 +44,6 @@ public class TicketSeller {
             // 2. 예매 진행
             reservationRepository.save(Reservation.of(reserveInfo));
             return true;
-
         } else {
             return false;
         }
